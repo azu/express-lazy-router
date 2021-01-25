@@ -29,8 +29,9 @@ Install with [npm](https://www.npmjs.com/):
 ## Usage
 
 ```ts
-import { createLazyRouter } from './lazy-router';
+import { createLazyRouter } from 'express-lazy-router';
 const lazyLoad = createLazyRouter({
+    // In production, Load router asap
     preload: process.env.NODE_ENV === 'production',
 });
 const app = express();
