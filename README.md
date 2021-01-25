@@ -36,7 +36,7 @@ const lazyLoad = createLazyRouter({
 });
 const app = express();
 // Load ./path_to_router.js when receive request to "/path_to_router"
-router.use(
+app.use(
     '/path_to_router',
     lazyLoad(() => import('./path_to_router')),
 );
