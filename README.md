@@ -11,7 +11,7 @@ Many compilation make startup of the web app slow. Lazy routing avoid this compi
 
 - [Compilation is unbelievably slow · Issue #754 · TypeStrong/ts-node](https://github.com/TypeStrong/ts-node/issues/754)
 
-In a frontend, We already use lazy loading for router like React Router, Vue Router.
+In a frontend, We have already used lazy loading for router like React Router, Vue Router.
 
 - [Route-based code splitting | React](https://reactjs.org/docs/code-splitting.html#route-based-code-splitting)
 - [Lazy Loading Routes | Vue Router](https://router.vuejs.org/guide/advanced/lazy-loading.html)
