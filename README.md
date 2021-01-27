@@ -45,6 +45,59 @@ app.listen(port, () => {
 });
 ```
 
+## Examples
+
+**Before**: No lazy loading
+
+`index.js`:
+
+```js
+import express from 'express';
+import api from "./api";
+const app = express();
+app.use(
+    '/api',
+    api
+);
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+});
+```
+
+`api.js`:
+
+```js
+import express from 'express';
+const router = express.Router();
+// GET api/status
+router.get("/status", () => {
+    // ... implementation
+});
+export default router;
+```
+
+**After**: lazy loading for api.js
+
+`index.js`:
+
+```diff
+import express from 'express';
++ import { createLazyRouter } from 'express-lazy-router';
++ const lazyLoad = createLazyRouter({
++     preload: process.env.NODE_ENV === 'production',
++ });
+const app = express();
+app.use(
+    '/api',
++    lazyLoad(() => import("./api"))
+);
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+});
+```
+
+`api.js`: No need to change!
+
 ## Limitation
 
 ### Avoid to use non-path router
