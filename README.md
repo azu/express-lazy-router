@@ -40,8 +40,8 @@ app.use(
     '/path_to_router',
     lazyLoad(() => import('./path_to_router')),
 );
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+app.listen(8000, () => {
+  console.log(`Example app listening at http://localhost:8000`)
 });
 ```
 
@@ -68,8 +68,8 @@ app.use(
     '/api',
     api
 );
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+app.listen(8000, () => {
+  console.log(`Example app listening at http://localhost:8000`)
 });
 ```
 
@@ -110,8 +110,8 @@ app.use(
 -    api
 +    lazyLoad(() => import("./api"))
 );
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+app.listen(8000, () => {
+    console.log(`Example app listening at http://localhost:8000`)
 });
 ```
 
@@ -150,8 +150,8 @@ const app = express();
 app.use(
     lazyLoad(() => import('./path_to_router')),
 );
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+app.listen(8000, () => {
+    console.log(`Example app listening at http://localhost:8000`)
 });
 ```
 
