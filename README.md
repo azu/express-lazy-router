@@ -42,8 +42,29 @@ app.use(
 );
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
-})
+});
 ```
+
+## Limitation
+
+### Avoid to use non-path router
+
+NG: express-lazy-router does not expect this way.
+
+```ts
+import { createLazyRouter } from 'express-lazy-router';
+const lazyLoad = createLazyRouter();
+const app = express();
+// Load ./path_to_router.js when receive request to "/path_to_router"
+app.use(
+    lazyLoad(() => import('./path_to_router')),
+);
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+});
+```
+
+
 
 ## Changelog
 
