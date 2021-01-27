@@ -143,8 +143,6 @@ app.listen(port, () => {
 });
 ```
 
-
-
 ## Changelog
 
 See [Releases page](https://github.com/azu/express-lazy-router/releases).
