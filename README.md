@@ -125,7 +125,7 @@ Behavior:
 - load `api.js`
 - > `{ ok: true }`
 
-The more details behavior when you use loader like [@babel/register](https://babeljs.io/docs/en/babel-register).
+The more details behavior when you use loader like [@babel/register](https://babeljs.io/docs/en/babel-register) or [ts-node](https://github.com/TypeStrong/ts-node).
 
 - load `index.js`
     - Compile `index.js` by babe;
