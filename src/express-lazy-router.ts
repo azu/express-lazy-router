@@ -43,7 +43,7 @@ export function createLazyRouter(options: createLazyLoaderOptions = {}) {
             if (loadedRouter) {
                 return loadedRouter(req, res, next);
             } else {
-                // first request handler
+                // request handler at first time
                 resolveResolver()
                     .then(() => {
                         return loadedRouter(req, res, next);

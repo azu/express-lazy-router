@@ -136,7 +136,6 @@ The more details behavior when you use loader like [@babel/register](https://bab
   - Compile `api.js` by babe;
 - > `{ ok: true }`
 
-
 ## Limitation
 
 ### Avoid to use non-path router
