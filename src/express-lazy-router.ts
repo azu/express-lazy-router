@@ -27,25 +27,28 @@ export function createLazyRouter(options: createLazyLoaderOptions = {}) {
      */
     return function lazyRouter(resolver: () => Promise<{ default: express.Router } | express.Router>) {
         const lazyRouter = express.Router();
-        let alreadyLoaded = false;
+        // Preserve loading order of router for default error handler
+        // https://github.com/azu/express-lazy-router/issues/1
+        let loadedRouter: express.Router;
         const resolveResolver = () => {
             return resolver().then((router) => {
-                alreadyLoaded = true;
                 if ("default" in router) {
-                    lazyRouter.use(router.default);
+                    loadedRouter = router.default;
                 } else {
-                    lazyRouter.use(router);
+                    loadedRouter = router;
                 }
             });
         };
-        lazyRouter.use((_req, _res, next) => {
-            if (alreadyLoaded) {
-                return next();
+        lazyRouter.use((req, res, next) => {
+            if (loadedRouter) {
+                // @ts-expect-error: Router#handle is not public?
+                return loadedRouter.handle(req, res, next);
             } else {
                 // first request handler
                 resolveResolver()
                     .then(() => {
-                        next();
+                        // @ts-expect-error: Router#handle is not public?
+                        return loadedRouter.handle(req, res, next);
                     })
                     .catch((error) => {
                         next(error);

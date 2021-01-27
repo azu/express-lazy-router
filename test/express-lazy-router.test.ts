@@ -1,4 +1,4 @@
-import express, { RequestHandler } from "express";
+import express, { ErrorRequestHandler, RequestHandler } from "express";
 import request from "supertest";
 
 import { createLazyRouter } from "../src/express-lazy-router";
@@ -63,6 +63,37 @@ describe("express-lazy-router", function () {
                 .then((response) => {
                     assert.deepStrictEqual(response.body, { ok: true });
                     requestTracker.verify();
+                });
+        });
+        it("should work with default(last) error handing ", async () => {
+            const app = express();
+            const expectedError = new Error("ERROR IN REQUEST HANDLER");
+            const requestTracker = new assert.CallTracker();
+            const defaultErrorTracker = new assert.CallTracker();
+            const shouldBeCalled = defaultErrorTracker.calls(() => {}, 1);
+            const requestHandler: RequestHandler = requestTracker.calls((_, _res, next) => {
+                next(expectedError);
+            }, 1);
+            app.use(
+                "/test",
+                lazyLoad(async () => createMockRouter(requestHandler))
+            );
+            app.use(((err, _req, res, _next) => {
+                shouldBeCalled();
+                assert.strictEqual(err.message, expectedError.message);
+                res.status(400).json({
+                    ok: false
+                });
+            }) as ErrorRequestHandler);
+            return request(app)
+                .get("/test")
+                .set("Accept", "application/json")
+                .expect("Content-Type", /json/)
+                .expect(400)
+                .then((res) => {
+                    assert.deepStrictEqual(res.body, { ok: false });
+                    requestTracker.verify();
+                    defaultErrorTracker.verify();
                 });
         });
         it("should lazy load router when receive request", () => {
