@@ -128,7 +128,7 @@ Behavior:
 The more details behavior when you use loader like [@babel/register](https://babeljs.io/docs/en/babel-register).
 
 - load `index.js`
-    - Compile `index.js` by babe;
+    - Compile `index.js` by babel
 - complete to launch the express app
 - `GET /api/status`
 - load `api.js`
