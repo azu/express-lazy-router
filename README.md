@@ -132,7 +132,7 @@ The more details behavior when you use loader like [@babel/register](https://bab
 - complete to launch the express app
 - `GET /api/status`
 - load `api.js`
-    - Compile `api.js` by babe;
+    - Compile `api.js` by babel
 - > `{ ok: true }`
 
 You can get lazy compilation for `api.js`.
