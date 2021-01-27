@@ -70,11 +70,19 @@ app.listen(port, () => {
 import express from 'express';
 const router = express.Router();
 // GET api/status
-router.get("/status", () => {
-    // ... implementation
+router.get("/status", (_, res) => {
+    res.json({ ok: true })
 });
 export default router;
 ```
+
+Behavior:
+
+- load `index.js`
+- load `api.js`
+- complete to launch the express app 
+- `GET /api/status`
+- > `{ ok: true }`
 
 **After**: lazy loading for api.js
 
@@ -99,6 +107,14 @@ app.listen(port, () => {
 ```
 
 `api.js`: No need to change!
+
+Behavior:
+
+- load `index.js`
+- complete to launch the express app
+- `GET /api/status`
+- load `api.js`
+- > `{ ok: true }`
 
 ## Changelog
 

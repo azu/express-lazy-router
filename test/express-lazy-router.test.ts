@@ -4,9 +4,9 @@ import request from "supertest";
 import { createLazyRouter } from "../src/express-lazy-router";
 import assert from "assert";
 
-const createMockRouter = (requestHandler: RequestHandler): express.Router => {
+const createMockRouter = (requestHandler: RequestHandler, path: string = "/"): express.Router => {
     const router = express.Router();
-    router.get("/", requestHandler);
+    router.get(path, requestHandler);
     return router;
 };
 const waitFor = (ms: number) => {
@@ -40,6 +40,29 @@ describe("express-lazy-router", function () {
                 .expect(200)
                 .then(() => {
                     assert.strictEqual(testRouterCalled, 1);
+                });
+        });
+        it("should lazy load router has sub path", async () => {
+            const app = express();
+            const requestTracker = new assert.CallTracker();
+            const requestHandler: RequestHandler = requestTracker.calls((_, res) => {
+                res.json({
+                    ok: true
+                });
+            }, 1);
+            // /api/status
+            app.use(
+                "/api",
+                lazyLoad(async () => createMockRouter(requestHandler, "/status"))
+            );
+            return request(app)
+                .get("/api/status")
+                .set("Accept", "application/json")
+                .expect("Content-Type", /json/)
+                .expect(200)
+                .then((response) => {
+                    assert.deepStrictEqual(response.body, { ok: true });
+                    requestTracker.verify();
                 });
         });
         it("should lazy load router when receive request", () => {
