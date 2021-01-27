@@ -115,6 +115,26 @@ Behavior:
 - `GET /api/status`
 - load `api.js`
 - > `{ ok: true }`
+  
+## Limitation
+
+### Avoid to use non-path router
+
+NG: express-lazy-router does not expect this way.
+
+```ts
+import { createLazyRouter } from 'express-lazy-router';
+const lazyLoad = createLazyRouter();
+const app = express();
+app.use(
+    lazyLoad(() => import('./path_to_router')),
+);
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+});
+```
+
+
 
 ## Changelog
 
