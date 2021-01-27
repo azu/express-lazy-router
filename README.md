@@ -45,6 +45,15 @@ app.listen(port, () => {
 });
 ```
 
+## Options
+
+### `preload` 
+
+> Default: false
+
+If it is `true`, preload the router module as soon as.
+It is not means sync load.
+
 ## Examples
 
 **Before**: No lazy loading
