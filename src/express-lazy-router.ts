@@ -41,14 +41,12 @@ export function createLazyRouter(options: createLazyLoaderOptions = {}) {
         };
         lazyRouter.use((req, res, next) => {
             if (loadedRouter) {
-                // @ts-expect-error: Router#handle is not public?
-                return loadedRouter.handle(req, res, next);
+                return loadedRouter(req, res, next);
             } else {
                 // first request handler
                 resolveResolver()
                     .then(() => {
-                        // @ts-expect-error: Router#handle is not public?
-                        return loadedRouter.handle(req, res, next);
+                        return loadedRouter(req, res, next);
                     })
                     .catch((error) => {
                         next(error);
