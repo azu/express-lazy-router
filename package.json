@@ -1,6 +1,6 @@
 {
   "name": "express-lazy-router",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Lazy loading for express router",
   "keywords": [
     "express",
