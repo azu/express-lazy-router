@@ -82,6 +82,7 @@ export default router;
 
 ```diff
 import express from 'express';
+- import api from "./api";
 + import { createLazyRouter } from 'express-lazy-router';
 + const lazyLoad = createLazyRouter({
 +     preload: process.env.NODE_ENV === 'production',
@@ -89,6 +90,7 @@ import express from 'express';
 const app = express();
 app.use(
     '/api',
+-    api
 +    lazyLoad(() => import("./api"))
 );
 app.listen(port, () => {
