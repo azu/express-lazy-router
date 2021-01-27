@@ -52,7 +52,7 @@ app.listen(8000, () => {
 > Default: false
 
 If it is `true`, preload the router module as soon as.
-It is not means sync load.
+It does not mean sync loading.
 
 ## Examples
 
