@@ -20,6 +20,17 @@ Also, [webpack](https://github.com/webpack/webpack) support [experiments.lazyCom
 
 So, We can get lazy routing in Node.js [Express routing](https://expressjs.com/en/guide/routing.html) too.
 
+Results of my project:
+
+- Before:
+  - 123 ts file Compilation
+  - Total startup time: 34236ms
+- After(use express-lazy-router):
+  - 14 ts file Compilation
+  - Total startup time: 14238ms
+- Summary:
+  - Compilation time is 200ms per 1 ts file
+
 ## Install
 
 Install with [npm](https://www.npmjs.com/):
