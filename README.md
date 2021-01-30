@@ -22,6 +22,8 @@ So, We can get lazy routing in Node.js [Express routing](https://expressjs.com/e
 
 Results of my project:
 
+> Use ts-node-dev + express
+
 - Before:
   - 123 ts file Compilation
   - Total startup time: 34236ms
