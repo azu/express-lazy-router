@@ -18,7 +18,7 @@ In a frontend, We have already used lazy loading with router like React Router, 
 
 Also, [webpack](https://github.com/webpack/webpack) support [experiments.lazyCompilation](https://github.com/webpack/webpack/releases/tag/v5.17.0) as experimentally.
 
-So, We can get lazy routing in Node.js [Express routing](https://expressjs.com/en/guide/routing.html) too.
+My motivation that We can do lazy routing in Node.js [Express routing](https://expressjs.com/en/guide/routing.html) too.
 
 Results of my project:
 
