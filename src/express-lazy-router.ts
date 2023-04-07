@@ -32,6 +32,14 @@ export function createLazyRouter(options: createLazyLoaderOptions = {}) {
         let loadedRouter: express.Router;
         const resolveResolver = () => {
             return resolver().then((router) => {
+                if (!router) {
+                    throw new Error(`lazyLoad(resolver) the resolver function should return a promise object, but it returns falsy value: ${router}
+
+You need to return a promise object from the callback function.
+
+    lazyLoad(() => import('./path_to_router')),                
+`);
+                }
                 if ("default" in router) {
                     loadedRouter = router.default;
                 } else {
