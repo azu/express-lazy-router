@@ -33,7 +33,7 @@ export function createLazyRouter(options: createLazyLoaderOptions = {}) {
         const resolveResolver = () => {
             return resolver().then((router) => {
                 if (!router) {
-                    throw new Error(`lazyLoad(resolve) the resolver function should return a promise object, but it returns falsy value: ${router}
+                    throw new Error(`lazyLoad(resolver) the resolver function should return a promise object, but it returns falsy value: ${router}
 
 You need to return a promise object from the callback function.
 
