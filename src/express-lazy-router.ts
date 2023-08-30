@@ -47,7 +47,7 @@ You need to return a promise object from the callback function.
                 }
             });
         };
-        lazyRouter.use((req, res, next) => {
+        lazyRouter.use(function lazyRouterHandler(req, res, next) {
             if (loadedRouter) {
                 return loadedRouter(req, res, next);
             } else {
